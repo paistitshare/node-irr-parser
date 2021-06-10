@@ -1,0 +1,11 @@
+{
+    "uri": {
+        "irr": {
+            "realEstate": "http://irr.by/realestate/longtime/"
+        },
+        "mongodb": "mongodb://localhost:27017/irr"
+    },
+    "cookie": {
+        "irr": "__utmz=239059032.1538906229.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _ym_uid=1538906229628731447; _ym_d=1538906229; puid=040cf0490fedbe2b6522d976730a9733; csid=7c94a9b6a4004e9b70067a966bd6d68a3ab85e82; una=1; rheftjdd=rheftjddVal; __utma=239059032.1814612434.1538906229.1538935457.1540036560.3; __utmc=239059032; _ym_isad=2; __utmt=1; __utmb=239059032.5.10.1540036560"
+    }
+}

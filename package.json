@@ -1,0 +1,25 @@
+{
+  "name": "irr-parser",
+  "version": "1.0.0",
+  "description": "Node irr parser.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "parser",
+    "irr.by"
+  ],
+  "author": "paistitshare@github.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "commander": "^2.19.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.4",
+    "mongorito": "^3.0.4"
+  }
+}
