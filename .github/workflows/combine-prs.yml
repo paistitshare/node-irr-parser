@@ -1,0 +1,19 @@
+name: gh-combine-prs
+
+on: [workflow_dispatch]
+
+permissions: write-all
+
+jobs:
+  combine_dependabot_prs:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install gh-combine-prs extension
+        run: gh extension install rnorth/gh-combine-prs
+
+      - name: Combine PRS
+        run: gh combine-prs --query "author:app/dependabot"
