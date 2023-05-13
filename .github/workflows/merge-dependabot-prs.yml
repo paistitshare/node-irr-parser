@@ -1,0 +1,44 @@
+name: Merge all dependabot PRs
+
+on: [workflow_dispatch]
+
+permissions: write-all
+
+jobs:
+  merge_dependabot_prs:
+    env:
+      CUSTOM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: GH token
+        run: echo "$GITHUB_TOKEN" | head -c 4
+
+      # - name: Approve PR using external action
+      #   uses: juliangruber/approve-pull-request-action@v2
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     number: 4
+      #     repo: juliangruber/approve-pull-request-action
+
+      # - name: Approve PR using custom PAT
+      #   run: |
+      #     echo "$CUSTOM_TOKEN" | gh auth login --with-token
+      #     gh pr review --approve https://github.com/paistitshare/node-irr-parser/pull/4
+        # env:
+        #   GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+
+      # - name: Install octokit
+      #   run: npm i octokit @actions/core @actions/github
+
+      # - name: Get Dependabot PR urls and trigger merge pipelines
+      #   env:
+      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #       GITHUB_ACTOR: ${{ github.actor }}
+      #   run: node .github/actions/mergeDependabotPRS.mjs

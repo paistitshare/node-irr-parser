@@ -1,0 +1,43 @@
+name: Custom PR combiner
+
+on:
+  workflow_dispatch:
+    inputs:
+      branchPrefix:
+        description: 'Branch prefix to find combinable PRs'
+        required: true
+        default: 'dependabot'
+      mustBeGreen:
+        description: 'Only combine PRs that are green (status is success). Set to false if repo does not run checks'
+        type: boolean
+        required: true
+        default: true
+      combineBranchName:
+        description: 'Name of the branch to combine PRs into'
+        required: true
+        default: 'combine-prs-branch'
+      ignoreLabel:
+        description: 'Exclude PRs with this label'
+        required: true
+        default: 'nocombine'
+
+jobs:
+  combine-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install dependencies
+        run: npm i octokit
+
+      - name: Create Combined PR
+        env:
+            GITHUB_TOKEN: ${{ github.token }}
+            GITHUB_ACTOR: ${{ github.actor }}
+        run: node .github/actions/createCombinedPR.mjs

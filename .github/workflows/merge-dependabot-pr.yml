@@ -1,0 +1,59 @@
+name: Merge Dependabot PR
+on:
+  repository_dispatch:
+    types: [trigger-dependabot-pr-merge]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  dependabot_pr_merge:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.head_ref || github.run_id }}
+      cancel-in-progress: false
+    env:
+      WORKFLOW_DISPATCHER: ${{ github.event.client_payload.workflow_dispatcher }}
+      PR_URL: ${{ github.event.client_payload.pr_url }}
+      PR_NUMBER: ${{ github.event.client_payload.pr_number }}
+      # GH_TOKEN: ${{ github.token }}
+      # GH_TOKEN: ${{ github.event.client_payload.dispatcher_token }}
+      DISPATCHER_TOKEN: ${{ github.event.client_payload.dispatcher_token }}
+      CUSTOM_TOKEN: ${{ github.event.client_payload.dispatcher_token }}
+
+    steps:
+      # - name: Approve by default "github-actions" user
+      #   run: gh pr review --approve "$PR_URL"
+
+      # - uses: actions/checkout@v2
+      # - name: Set git user as ${{ env.WORKFLOW_DISPATCHER }}
+      #   run: git config user.name "$WORKFLOW_DISPATCHER"
+
+      # - name: Approve PR using custom PAT
+      #   run: |
+      #     echo "$CUSTOM_TOKEN" | gh auth login --with-token
+      #     gh pr review --approve "$PR_URL"
+        # env:
+        #   GITHUB_TOKEN: ${{ env.CUSTOM_TOKEN }}
+
+      # - uses: actions/checkout@v2
+
+      # - name: Use Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version-file: ".nvmrc"
+
+      # - name: Install dependencies
+      #   run: npm i octokit
+
+      # - name: Approve PR as workflow dispatching user
+      #   env:
+      #       GITHUB_TOKEN: ${{ env.GH_TOKEN }}
+      #       GITHUB_ACTOR: ${{ github.actor }}
+      #       WORKFLOW_DISPATCHER: ${{ env.WORKFLOW_DISPATCHER }}
+      #       DISPATCHER_TOKEN: ${{ env.DISPATCHER_TOKEN }}
+      #   run: node .github/actions/approvePR.mjs
+
+      # - name: Merge
+      #   run: gh pr merge --squash --delete-branch "$PR_URL"
