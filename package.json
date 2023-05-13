@@ -19,7 +19,7 @@
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
     "moment": "^2.22.2",
-    "mongoose": "^5.3.4",
+    "mongoose": "^7.1.1",
     "mongorito": "^3.0.4"
   }
 }
