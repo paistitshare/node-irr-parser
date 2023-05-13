@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      - cron: "*/5 * * * *"
+      interval: "daily"
 
   - package-ecosystem: "docker"
     directory: "/"
