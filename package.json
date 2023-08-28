@@ -15,7 +15,7 @@
   "author": "paistitshare@github.com",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^1.5.0",
     "cheerio": "^1.0.0-rc.2",
     "commander": "^10.0.1",
     "moment": "^2.22.2",
